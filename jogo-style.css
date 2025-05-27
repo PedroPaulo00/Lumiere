@@ -1,0 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Cal Sans", sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: black;
+    letter-spacing: 1px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #DAA914;
+    background-color: black;
+    padding: 4px 16px; 
+    position: relative; 
+    width: 100%; 
+    box-sizing: border-box;
+    flex-shrink: 0; 
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 32px; 
+    width: auto;   
+}
+
+header h1 {
+    margin-left: 10px; 
+    line-height: 1;
+    font-size: 1.5rem;
+    color: #DAA914;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-img {
+    height: 32px; 
+    width: auto; 
+}
+
+.icon-img:hover {
+    filter: brightness(0.8);
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 1000; 
+    display: none; 
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #222; 
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    position: relative; 
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content h2 {
+    margin: 0 0 15px;
+    font-size: 24px;
+    color: #DAA914; 
+}
+
+.popup-content p {
+    margin: 0 0 15px;
+    font-size: 16px;
+}
+
+.popup-content ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.popup-content li {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.close-popup { 
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+.close-popup:hover {
+    color: #DAA914;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.calendar-day {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.calendar-day.today {
+    background-color: #DAA914;
+    color: black;
+}
+
+.calendar-day:hover {
+    background-color: #555;
+}
+
+.pause-popup {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(imgs/pause_background.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 2000;
+    color: white;
+    flex-direction: column;
+}
+
+.pause-popup h2 {
+    font-family: "Cal Sans", sans-serif;
+    font-size: 3rem; 
+    color: #DAA914; 
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.resume-button {
+    font-family: "Cal Sans", sans-serif;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #DAA914; 
+    color: black; 
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.resume-button:hover {
+    background-color: #c49512; 
+    transform: translateY(-2px);
+}
+
+.resume-button:active {
+    transform: translateY(1px);
+}
+
+
+/* Layout dos Painéis Esquerdo e Direito */
+.left-panel {
+    width: 50%;
+    height: 100vh; /* Ocupa toda a altura da viewport */
+    padding: 10px 20px; /* Padding vertical reduzido, horizontal mantido */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Tenta distribuir o espaço entre os filhos diretos */
+    background-color: black;
+    color: white;
+    overflow: hidden; 
+}
+
+header .logo-img {
+    height: 32px;
+    width: auto;
+}
+
+
+.right-panel {
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #111; 
+}
+
+.carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-img.active {
+    opacity: 1;
+}
+
+.right-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px; 
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,0.8) 30%, transparent 100%);
+    z-index: 1; 
+    pointer-events: none; 
+}
+
+.timer {
+    font-size: 38px; 
+    font-weight: bold;
+    text-align: center;
+    font-family: "Cal Sans", sans-serif;
+    margin-top: 5px; 
+    margin-bottom: 2px; 
+    flex-shrink: 0;
+}
+
+.score-counter { 
+    font-size: 16px; 
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0px; 
+    margin-bottom: 8px;
+    color: #DAA914; 
+    flex-shrink: 0;
+}
+
+.score-counter.game-over {
+    color: #ff0000; 
+}
+
+.info-squares {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 8px 0;
+    flex-shrink: 0;
+}
+
+.info-square {
+    width: 70px; 
+    height: 70px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    border-radius: 8px; 
+    text-align: center;
+    padding: 4px; 
+    box-sizing: border-box;
+}
+
+.square-icon {
+    width: 28px;
+    height: 28px; 
+    object-fit: contain;
+    margin-bottom: 4px;
+}
+
+.info-square span {
+    font-size: 11px;
+    color: white;
+}
+
+.hint {
+    font-size: 13px; 
+    text-align: center;
+    margin-top: 8px; 
+    margin-bottom: 8px; 
+    padding: 0 10px; 
+    color: #ccc; 
+    line-height: 1.3; 
+    flex-shrink: 0;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 8px; 
+    margin-top: 8px; 
+    margin-bottom: 8px; 
+    flex-shrink: 0;
+}
+
+.input-container h1 {
+    font-size: 17px; 
+    margin: 0 0 5px 0; 
+    color: #DAA914;
+}
+
+.guess-input {
+    font-family: "Cal Sans", sans-serif;
+    padding: 8px; 
+    font-size: 15px; 
+    width: 70%; 
+    max-width: 300px; 
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #1c1c1c;
+    color: white;
+    text-align: center;
+}
+
+.guess-input::placeholder {
+    color: #777;
+}
+
+.submit-button {
+    font-family: "Cal Sans", sans-serif;
+    padding: 8px 18px; 
+    font-size: 15px; 
+    background-color: #DAA914; 
+    color: black; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #c49512; 
+}
+
+.left-panel-bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; 
+    flex-shrink: 0; 
+    margin-top: 8px; 
+}
+
+.score-squares {
+    display: flex;
+    justify-content: center;
+    gap: 5px; 
+    flex-wrap: wrap; 
+}
+
+.score-square {
+    width: 18px; 
+    height: 18px; 
+    background-color: #333;
+    border-radius: 3px; 
+}
+
+.score-text {
+    display: flex;
+    justify-content: center;
+    gap: 8px; 
+    color: white;
+    align-items: center;
+}
+
+.score-label {
+    font-size: 11px; 
+    text-align: center;
+    vertical-align: middle; 
+}
+
+.score-value {
+    color: #DAA914;
+    font-size: 20px; 
+    font-weight: bold; 
+    text-align: center;
+}
+
+hr { 
+    border: none;
+    height: 2px; 
+    background-color: #DAA914; 
+    margin: 10px 0;
+    width: 100%; 
+    display: block; 
+    flex-shrink: 0; 
+}
+

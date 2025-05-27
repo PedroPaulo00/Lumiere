@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière</title>
+    <link rel="stylesheet" href="jogo-style.css">
+    </head>
+<body>
+    <div class="left-panel">
+        <header>
+            <div class="logo">
+                <img src="imgs/logo.png" alt="Logo" class="logo-img" onerror="this.src='https://placehold.co/50x32/000000/DAA914?text=Lumiere'; this.onerror=null;">
+                <h1>Lumière</h1>
+            </div>
+            <div class="header-buttons">
+                <button class="icon-button pause-button" aria-label="Pausar Jogo">
+                    <img src="https://placehold.co/32x32/DAA914/000000?text=%7C%7C" alt="Pausar" class="icon-img" onerror="this.src='https://placehold.co/32x32/DAA914/000000?text=P'; this.onerror=null;">
+                </button>
+            </div>
+        </header>
+
+        <hr>
+
+        <div class="timer">2:00</div>
+        <div class="info-squares">
+            <div class="info-square">
+                <span>País:</span>
+                <img src="imgs/flag.png" alt="Ícone País" class="square-icon" onerror="this.src='https://placehold.co/40x40/333333/FFFFFF?text=Pa%C3%ADs'; this.onerror=null;">
+            </div>
+            <div class="info-square">
+                <span>Gênero:</span>
+                <img src="imgs/romance.png" alt="Ícone Gênero" class="square-icon" onerror="this.src='https://placehold.co/40x40/333333/FFFFFF?text=G%C3%AAnero'; this.onerror=null;">
+            </div>
+            <div class="info-square">
+                <span>Ano:</span>
+                <img src="imgs/year.png" alt="Ícone Ano" class="square-icon" onerror="this.src='https://placehold.co/40x40/333333/FFFFFF?text=Ano'; this.onerror=null;">
+            </div>
+        </div>
+        <div class="hint">Dica: "Quando os holofotes se apagam, a melodia de um grande amor pode ecoar para sempre."</div>
+        <div class="input-container">
+            <h1>Eu acho que o filme é...</h1>
+            <input type="text" class="guess-input" placeholder="">
+            <button class="submit-button">Enviar</button>
+        </div>
+
+        <hr>
+
+        <div class="score-squares">
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+            <div class="score-square"></div>
+        </div>
+        <div class="score-text">
+            <span class="score-label">Sua pontuação de hoje é:</span>
+            <span class="score-value">51</span>
+            <span class="score-label">pontos.</span>
+        </div>
+        <div class="confirm-button"></div> </div>
+
+    <div class="right-panel">
+        <div class="carousel">
+            <img src="imgs/template1.png" alt="Imagem 1 do Filme" class="carousel-img" onerror="this.src='https://placehold.co/800x600/1a1a1a/444444?text=Cena+1'; this.onerror=null;">
+            <img src="imgs/template2.png" alt="Imagem 2 do Filme" class="carousel-img" onerror="this.src='https://placehold.co/800x600/1a1a1a/444444?text=Cena+2'; this.onerror=null;">
+            <img src="imgs/template3.png" alt="Imagem 3 do Filme" class="carousel-img" onerror="this.src='https://placehold.co/800x600/1a1a1a/444444?text=Cena+3'; this.onerror=null;">
+            <img src="imgs/template4.png" alt="Imagem 4 do Filme" class="carousel-img" onerror="this.src='https://placehold.co/800x600/1a1a1a/444444?text=Cena+4'; this.onerror=null;">
+            <img src="imgs/template5.png" alt="Imagem 5 do Filme" class="carousel-img" onerror="this.src='https://placehold.co/800x600/1a1a1a/444444?text=Cena+5'; this.onerror=null;">
+        </div>
+    </div>
+
+    <div class="popup pause-popup" id="pausePopup">
+        <h2>JOGO PAUSADO!</h2>
+        <button class="resume-button">Resumir Partida</button>
+    </div>
+
+    <audio id="background-audio" loop muted>
+        <source src="assets/sounds/somfundo.mp3" type="audio/mp3">
+        <source src="imgs/background-music.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('background-audio');
+            const playAudio = () => {
+                audio.muted = false;
+                audio.play().catch(error => {
+                    console.error('Audio playback failed:', error, 'Waiting for user interaction.');
+                });
+                document.body.removeEventListener('click', playAudio);
+                document.body.removeEventListener('touchstart', playAudio);
+            };
+
+             setTimeout(() => {
+                audio.muted = false;
+                audio.play().catch(error => {
+                    console.warn('Delayed audio playback failed, likely due to autoplay policy. User interaction is usually required.');
+                });
+            }, 100);
+
+            // document.body.addEventListener('click', playAudio, { once: true });
+            // document.body.addEventListener('touchstart', playAudio, { once: true });
+        });
+    </script>
+    <script src="jogo.js"></script>
+</body>
+</html>
